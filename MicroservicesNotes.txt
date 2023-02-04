@@ -1,0 +1,59 @@
+Monolithic architecture:
+==========================
+
+multiple components are combined in single large app.
+
+For example: product module,users module,order module,payment module, shipment module,cart module
+all the above module in single packet.
+
+Disadvantge of monolithic architecture
+=======================================
+1.single code base
+2.deployed in single bundle
+3.change in one service then whole app is redeployed
+4. Building problem: developers has to communicate
+5. Problem in scale
+6. Cumbersome(Hard to maintain) over time
+
+Microservices
+===============>
+1. Large apps are divide into small parts.
+2. Different codebase
+3. Each Module Managed independently.
+4. Different tech stack [java,python]
+
+Disadvantages
+===============>
+1. Handling microservices is complex.
+ 
+Note: all small parts can communicate using REST APIS.
+
+Hotel Service use db1 -> microservice1- use any tech stack.
+User Service use db2 ->  microservice 2- use any tech stack.
+Rating Service use db3-> microservice 3- use any tech stack.
+
+
+                   Registered
+service registry(Track all the information of indivial services)----------------->connected with userservice,rating service and hotel service.
+http://service-name/
+                      
+Lets start building microservices
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
