@@ -16,6 +16,7 @@ import com.masai.user.service.entities.Hotel;
 import com.masai.user.service.entities.Rating;
 import com.masai.user.service.entities.User;
 import com.masai.user.service.exceptions.ResourceNotFoundException;
+import com.masai.user.service.external.services.HotelService;
 import com.masai.user.service.repositories.UserRepository;
 import com.masai.user.service.services.UserService;
 
@@ -29,6 +30,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private HotelService hotelService;
 	
 	private Logger logger=LoggerFactory.getLogger(UserServiceImpl.class);
 	
@@ -53,7 +57,7 @@ public class UserServiceImpl implements UserService{
 	
 //	http://localhost:8083/ratings/users/62f0a0b6-56c2-4bcb-b295-d93423d71a2c
 	
-Rating[] ratingsofUser=restTemplate.getForObject("http://localhost:8083/ratings/users/"+user.getUserId(), Rating[].class);
+Rating[] ratingsofUser=restTemplate.getForObject("http://RATING-SERVICE/ratings/users/"+user.getUserId(), Rating[].class);
 logger.info("{} ",ratingsofUser);
 
 List<Rating> ratings=Arrays.stream(ratingsofUser).toList();
@@ -61,10 +65,10 @@ List<Rating> ratingList=ratings.stream().map(rating->{
 	// api call to hotel service to get the hotel
 	
 	// http://localhost:8082/hotels/4e93ceb0-8afb-45aa-a6f3-6f8097f7570b
-	ResponseEntity<Hotel> getEntity=restTemplate.getForEntity("http://localhost:8082/hotels/"+rating.getHotelId(), Hotel.class);
+//	ResponseEntity<Hotel> getEntity=restTemplate.getForEntity("http://HOTEL-SERVICE/hotels/"+rating.getHotelId(), Hotel.class);
 	
-	Hotel hotel=getEntity.getBody();
-	logger.info("response state code: {} ",getEntity.getStatusCode());
+	Hotel hotel=hotelService.getHotel(rating.getHotelId());
+//	logger.info("response state code: {} ",getEntity.getStatusCode());
 	// set the hotel to rating
 	rating.setHotel(hotel);
 	// return the rating

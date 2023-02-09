@@ -39,6 +39,14 @@ http://service-name/
                       
 Lets start building microservices
 
+what is feign client?
+answer it is like a restTemplate which is used to call apis but it follows declararive approach to calling HTTP request.The Feign is a declarative web service (HTTP client) developed by Netflix. Its aim is to simplify the HTTP API clients. It is a Java to HTTP client binder. If you want to use Feign, create an interface, and annotate it.
+
+Api GateWay
+============>
+client---sent request to API GATEWAY
+
+
 
 
 
